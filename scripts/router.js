@@ -35,4 +35,66 @@ router.setState = function() {
    *    1. You may add as many helper functions in this file as you like
    *    2. You may modify the parameters of setState() as much as you like
    */
+
+  // Home page
+  document.querySelector('body header h1').addEventListener('click', () => {
+    history.pushState({state: "home"}, '', '#home')
+    home_page();
+  });
+
+  // Settings page
+  document.querySelector('body header img[alt="settings"]').addEventListener('click', () => {
+    history.pushState({state: "settings"}, '', '#settings')
+    settings_page();
+  });
+
+  // Single Entry page
+  let index = 1;
+  document.querySelectorAll('journal-entry').forEach(entry => {
+    let stateObj = {state: "single-entry", index: index, entry: entry.entry},
+        ref = '#entry' + index;
+    entry.addEventListener('click', () => {
+      history.pushState(stateObj, '', ref);
+      single_entry_page(stateObj);
+    })
+    index++;
+  });
+
+  window.addEventListener('popstate', event => {
+    if (event.state) {
+      switch (event.state.state) {
+        case "home":
+          home_page();
+          break;
+        case "settings":
+          settings_page();
+          break;
+        case "single-entry":
+          single_entry_page(event.state);
+          break;
+      }
+    }
+    else {
+      home_page();
+    }
+  })
+}
+
+function settings_page() {
+  document.body.setAttribute('class', 'settings');
+  document.querySelector('body header h1').innerHTML = 'Settings';
+}
+
+function home_page() {
+  document.body.removeAttribute('class');
+  document.querySelector('body header h1').innerHTML = 'Journal Entries';
+}
+
+function single_entry_page(state) {
+  console.log(state.entry);
+  document.body.setAttribute('class', 'single-entry');
+  document.body.removeChild(document.querySelector('body entry-page'));
+  document.body.appendChild(document.createElement('entry-page'));
+  document.querySelector('body entry-page').entry = state.entry;
+  document.querySelector('body header h1').innerHTML = 'Entry ' + state.index;
 }

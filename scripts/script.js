@@ -14,5 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
         newPost.entry = entry;
         document.querySelector('main').appendChild(newPost);
       });
-    });
+    })
+    .then(() => setState());
 });
