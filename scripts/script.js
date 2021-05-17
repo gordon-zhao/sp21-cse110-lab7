@@ -4,6 +4,7 @@ import { router } from './router.js'; // Router imported so you can use it to ma
 const setState = router.setState;
 
 // Make sure you register your service worker here too
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
       navigator.serviceWorker.register('/sp21-cse110-lab7/sw.js').then(function(registration) {
@@ -15,6 +16,7 @@ if ('serviceWorker' in navigator) {
       });
   });
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
   fetch('https://cse110lab6.herokuapp.com/entries')
