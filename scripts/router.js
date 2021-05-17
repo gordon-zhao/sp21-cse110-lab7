@@ -91,7 +91,6 @@ function home_page() {
 }
 
 function single_entry_page(state) {
-  console.log(state.entry);
   document.body.setAttribute('class', 'single-entry');
   document.body.removeChild(document.querySelector('body entry-page'));
   document.body.appendChild(document.createElement('entry-page'));
