@@ -38,7 +38,7 @@ router.setState = function() {
 
   // Home page
   document.querySelector('body header h1').addEventListener('click', () => {
-    history.pushState({state: "home"}, '', '#home')
+    history.pushState({state: "home"}, '', '/')
     home_page();
   });
 

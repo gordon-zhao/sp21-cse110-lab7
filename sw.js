@@ -7,14 +7,6 @@
 
 var CACHE_NAME = 'journal-cache'
 var urlsToCache = [
-    './',
-    './sw.js',
-    './scripts/router.js',
-    './scripts/script.js',
-    './settings.svg',
-    './style.css',
-    './components/entry-page.js',
-    './components/journal-entry.js',
     'https://cse110lab6.herokuapp.com/entries'
 ]
 
@@ -38,6 +30,7 @@ self.addEventListener('fetch', function(event) {
       caches.match(event.request)
         .then(function(response) {
           // Cache hit - return response
+          console.log(response)
           if (response) {
             return response;
           }
